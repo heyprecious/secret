@@ -996,7 +996,7 @@ body {
   position: relative;
   background: #fffaf2;
   border-radius: 14px;
-  padding: 22px 0 0 22px;
+  padding: 22px;
   border: 1px solid #eddcc4;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 6px 16px rgba(0,0,0,0.2);
   overflow: hidden;
@@ -1029,9 +1029,23 @@ body {
   overflow-y: auto; /* enable scrolling */
   z-index: 1;
   pointer-events: auto; /* enable scrolling */
-  padding: 0 22px 22px 0; /* Add right padding to match paper container */
+  padding: 40px 22px 40px 22px; /* Equal padding on all sides to center content */
   margin: 0;
   box-sizing: border-box;
+  text-align: left;
+  white-space: pre-wrap; /* Preserve line breaks and spacing */
+}
+
+/* Mobile portrait mode adjustments */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .paper-text {
+    padding: 30px 22px 30px 22px; /* Equal padding on all sides for better centering */
+    min-height: 400px; /* Taller minimum height on mobile */
+  }
+  
+  .paper {
+    padding: 22px; /* Equal padding on all sides */
+  }
 }
 
 /* Custom scrollbar styling to align with paper edge */
@@ -1116,8 +1130,9 @@ body {
 }
 .balloon-string svg { display: block; width: 100%; height: 100%; }
 @keyframes float-up {
-  0%   { transform: translateY(0); opacity: .95; }
-  100% { transform: translateY(-120vh); opacity: 0; }
+  0%   { transform: translateY(0); opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-150vh); opacity: 0; }
 }
 
 /* Cake Screen */

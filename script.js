@@ -1248,8 +1248,9 @@
     // slight vertical offset to avoid same start line
     el.style.bottom = `${-120 - Math.floor(Math.random() * 80)}px`;
 
-    // Cleanup after animation
-    const ttl = (delay + floatDuration + 0.5) * 1000;
+    // Cleanup after animation completes - wait for full animation to finish
+    // Add extra buffer to ensure balloon floats all the way to top before removal
+    const ttl = (delay + floatDuration + 1) * 1000; // Extra 1 second buffer
     setTimeout(() => { 
       if (el.parentNode) {
         el.remove(); 
