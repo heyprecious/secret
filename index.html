@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Message</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- Loading Screen -->
+    <section id="loading-screen" class="screen active" aria-label="Loading">
+        <div class="loading-wrapper">
+            <div class="loading-content">
+                <div class="loading-icon">
+                    <div class="icon-circle"></div>
+                    <div class="icon-sparkles">
+                        <span class="sparkle sparkle-1">✨</span>
+                        <span class="sparkle sparkle-2">✨</span>
+                        <span class="sparkle sparkle-3">✨</span>
+                    </div>
+                </div>
+                <h2 class="loading-title">Loading<span class="loading-dots-inline">
+                    <span class="dot dot-1">.</span>
+                    <span class="dot dot-2">.</span>
+                    <span class="dot dot-3">.</span>
+                </span></h2>
+                <div class="progress-container">
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar-bg">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%">
+                                <div class="progress-shine"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Password Screen -->
+    <section id="password-screen" class="screen" aria-label="Password Entry">
+        <div class="password-wrapper">
+            <button id="password-info-btn" class="password-info-btn" aria-label="Show Instructions">!</button>
+            <div class="password-title">ENTER ONE TIME PASSWORD</div>
+            <div class="password-input-container">
+                <input type="text" id="password-input" class="password-input" placeholder="Type password here..." />
+                <button id="password-submit-btn" class="password-submit-btn" aria-label="Submit Password">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="password-caps-message" class="password-caps-message">USE CAPSLOCK OR CAPITAL LETTERS ONLY</div>
+            <div id="welcome-message" class="welcome-message hidden">
+                <span class="welcome-text">WELCOME</span>
+            </div>
+        </div>
+        
+        <!-- Password Info Modal -->
+        <div id="password-info-modal" class="password-info-modal hidden">
+            <div class="password-info-modal-content">
+                <button id="password-info-close" class="password-info-close" aria-label="Close">×</button>
+                <div class="password-info-message">
+                    <p class="password-info-text">! THE PASSWORD IS ONLY 1 TIME USE AND YOU CANNOT USE IT AGAIN.</p>
+                    <p class="password-info-text">! KINDLY ROTATE YOUR PHONE TO LANDSCAPE.</p>
+                    <p class="password-info-text">! MUCH BETTER IF YOU USE YOUR PC/LAPTOP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Menu -->
+    <section id="menu-screen" class="screen" aria-label="Main Menu">
+        <div class="menu-wrapper">
+            <button id="btn-open" class="btn btn-primary" aria-label="Open This">Open This</button>
+            <button id="btn-exit-main" class="btn btn-exit" aria-label="Exit">Exit</button>
+            <div class="landscape-note">
+                <span class="note-icon">📱</span>
+                <span class="note-text">Reminder: Read the Instructions carefully!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selection Screen -->
+    <section id="selection-screen" class="screen" aria-label="Selection Screen">
+        <div class="selection-wrapper">
+            <!-- Mail Section -->
+            <div class="selection-section">
+                <div class="selection-box selection-box-red">
+                    <div class="box-emoji">📩</div>
+                    <button id="btn-open-message" class="btn btn-selection btn-message" aria-label="Open This Message">
+                        <span class="btn-text">open this message</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Cake Section -->
+            <div class="selection-section">
+                <div class="selection-box selection-box-blue">
+                    <div class="box-emoji">🎂</div>
+                    <button id="btn-open-cake-selection" class="btn btn-selection btn-cake" aria-label="Open This Cake">
+                        <span class="btn-text">open this cake</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Birthday Message -->
+    <section id="message-screen" class="screen" aria-label="Birthday Message">
+        <div class="balloons-layer" aria-hidden="true"></div>
+        <div class="message-wrapper">
+            <h1 class="title">HAPPY 16TH BIRTHDAY BOI!!</h1>
+            <div class="paper">
+                <div class="paper-lines"></div>
+                <textarea class="paper-text" id="paper-text" placeholder="I KNOW IT’S ONLY BEEN A FEW DAYS SINCE WE STARTED TALKING, AND I REALLY APPRECIATE IT. I REALLY APPRECIATE THE EFFORT YOU’VE BEEN GIVING AND HOW GENUINE, SWEET, AND CARING YOU ARE TO ME. TALKING TO YOU MAKES ME FEEL SAFE AND COMFORTABLE WITH YOU, AND THAT’S A BIG DEAL TO ME.
+
+                I KNOW SCHOOL CAN SOMETIMES GET TIRING AND STRESSFUL, WITH ALL THE DEADLINES AND PRESSURE, BUT I HOPE THIS YEAR BRINGS YOU MORE STRENGTH, FOCUS, AND MORE CONFIDENCE SINCE YOU STILL HAVE A LONG JOURNEY TO TAKE. I HOPE YOU KEEP BELIEVING IN YOURSELF, EVEN ON DAYS WHEN THINGS FEEL OVERWHELMING, BUT AS YOU KNOW, I’M HERE. YOU’RE DOING BETTER THAN YOU THINK.
+                
+                FOR TODAY, I HOPE YOU LET YOURSELF ENJOY YOUR DAY. EAT WELL AND FEEL HOW APPRECIATED YOU ARE. THANK YOU FOR THE PATIENCE, THE EFFORT, AND THE SWEETNESS YOU’VE SHOWN ME THESE PAST FEW DAYS. I HOPE YOUR BIRTHDAY GOES WELL, AND MORE BIRTHDAYS TO COME.
+                
+                HAPPY HAPPY BIRTHDAY BEBE BOII💛🥳" readonly aria-readonly="true" tabindex="-1"></textarea>
+            </div>
+            <div class="button-row">
+                <button id="btn-back-to-main-menu-message" class="btn btn-back" aria-label="Back to Main Menu">Back to Main Menu</button>
+                <button id="btn-exit-message" class="btn btn-exit-bottom" aria-label="Exit">Exit</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cake Screen -->
+    <section id="cake-screen" class="screen" aria-label="Cake Screen">
+        <div class="cake-wrapper">
+            <button id="cake-info-btn" class="cake-info-btn" aria-label="Show Instructions">!</button>
+            <div class="candle-count-display">
+                HAPPY BIRTHDAY BEBE ZAIJAN!
+            </div>
+            <div class="cake-container">
+                <div class="cake" id="interactive-cake">
+                    <div id="candleCount" style="display:none;"></div>
+                    <div class="plate"></div>
+                    <div class="layer layer-bottom"></div>
+                    <div class="layer layer-middle"></div>
+                    <div class="layer layer-top"></div>
+                    <div class="icing"></div>
+                    <div class="drip drip1"></div>
+                    <div class="drip drip2"></div>
+                    <div class="drip drip3"></div>
+                </div>
+            </div>
+            <div class="cake-button-row">
+                <button id="btn-back-to-main-menu-cake" class="btn btn-back-small" aria-label="Back to Main Menu">Back to Main Menu</button>
+                <button id="btn-exit-cake" class="btn btn-exit-small" aria-label="Exit">Exit</button>
+            </div>
+            
+            <!-- Countdown Timer Section -->
+            <div class="countdown-wrapper">
+                <div class="countdown-title">NEXT YEAR BIRTHDAY COUNTDOWN</div>
+                <div class="countdown-display" id="countdown-display">
+                    <span class="countdown-number" id="countdown-days">365</span>
+                    <span class="countdown-separator">:</span>
+                    <span class="countdown-number" id="countdown-hours">00</span>
+                    <span class="countdown-separator">:</span>
+                    <span class="countdown-number" id="countdown-minutes">00</span>
+                    <span class="countdown-separator">:</span>
+                    <span class="countdown-number" id="countdown-seconds">00</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cake Info Modal -->
+        <div id="cake-info-modal" class="cake-info-modal hidden">
+            <div class="cake-info-modal-content">
+                <button id="cake-info-close" class="cake-info-close" aria-label="Close">×</button>
+                <div class="cake-info-message">
+                    <p class="cake-info-text">*PLEASE ALLOW MICROPHONE.</p>
+                    <p class="cake-info-text"><span class="clickable-text" id="clickable-asterisk">*</span>ADD AS MUCH CANDLE AS YOU WANT AND BLOW YOUR MICROPHONE.</p>
+                    <p class="cake-info-text">*SOMETIMES THE MICROPHONE IS ACTING CRAZY, BUT IM FIXING IT.</p>
+                    <button id="reset-timer-btn" class="reset-timer-btn hidden">Reset Timer to 365 Days</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
