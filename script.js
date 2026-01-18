@@ -162,6 +162,36 @@
     
     const enteredPassword = input.value.trim();
     
+    // Check if password is empty
+    if (!enteredPassword || enteredPassword.length === 0) {
+      showErrorMessage(false, 'ENTER PASSWORD');
+      // Flash the input field
+      input.style.animation = 'shake 0.5s ease-in-out';
+      input.value = '';
+      
+      // Flash the button
+      if (btn) {
+        btn.style.animation = 'button-flash 0.5s ease-in-out';
+        setTimeout(() => {
+          btn.style.animation = '';
+        }, 500);
+      }
+      
+      // Flash the container
+      if (container) {
+        container.style.animation = 'container-flash 0.5s ease-in-out';
+        setTimeout(() => {
+          container.style.animation = '';
+        }, 500);
+      }
+      
+      setTimeout(() => {
+        input.style.animation = '';
+        input.focus();
+      }, 500);
+      return;
+    }
+    
     console.log('Entered password:', enteredPassword);
     console.log('Valid passwords:', VALID_PASSWORDS);
     console.log('Is valid password:', VALID_PASSWORDS.includes(enteredPassword));
