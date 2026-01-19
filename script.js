@@ -684,8 +684,39 @@
   }
   
   function setupMicrophoneWithInteraction() {
-    // Setup microphone immediately without button
-    setupMicrophone();
+    // On mobile, we need to ensure user interaction has happened
+    // Try to setup microphone, but also add click/touch handlers as backup
+    const setupOnInteraction = () => {
+      if (!audioContext || audioContext.state === 'closed') {
+        setupMicrophone();
+      } else if (audioContext.state === 'suspended') {
+        // Resume audio context if suspended (common on mobile)
+        audioContext.resume().then(() => {
+          console.log("Audio context resumed");
+          if (!analyser) {
+            setupMicrophone();
+          }
+        }).catch(err => {
+          console.log("Failed to resume audio context:", err);
+          setupMicrophone();
+        });
+      } else {
+        setupMicrophone();
+      }
+    };
+    
+    // Try immediately
+    setupOnInteraction();
+    
+    // Also setup on first user interaction (for mobile browsers)
+    const handleInteraction = () => {
+      setupOnInteraction();
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+    };
+    
+    document.addEventListener('click', handleInteraction, { once: true });
+    document.addEventListener('touchstart', handleInteraction, { once: true });
   }
 
   function addMicrophoneIndicator() {
@@ -753,6 +784,15 @@
   }
 
   interactiveCake.addEventListener("click", function (event) {
+    // Resume audio context on user interaction (required for mobile)
+    if (audioContext && audioContext.state === 'suspended') {
+      audioContext.resume().then(() => {
+        console.log("Audio context resumed on click");
+      }).catch(err => {
+        console.log("Failed to resume audio context on click:", err);
+      });
+    }
+    
     // Check if clicking on an existing candle
     const clickedCandle = event.target.closest('.candle');
     if (clickedCandle) {
@@ -768,6 +808,18 @@
     // Only allow candle placement at the top of the cake (top 50px)
     if (top <= 50) {
       addCandle(left, top);
+    }
+  });
+  
+  // Also handle touch events for mobile
+  interactiveCake.addEventListener("touchstart", function (event) {
+    // Resume audio context on user interaction (required for mobile)
+    if (audioContext && audioContext.state === 'suspended') {
+      audioContext.resume().then(() => {
+        console.log("Audio context resumed on touch");
+      }).catch(err => {
+        console.log("Failed to resume audio context on touch:", err);
+      });
     }
   });
 
@@ -884,24 +936,47 @@
   }
 
   function setupMicrophone() {
+    // Don't setup if already set up and working
+    if (analyser && microphone && audioContext && audioContext.state !== 'closed') {
+      console.log("Microphone already set up");
+      return;
+    }
     
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // For mobile devices, use simpler audio constraints
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      const audioConstraints = isMobile ? {
+        echoCancellation: true, // Enable on mobile for better quality
+        noiseSuppression: true, // Enable on mobile
+        autoGainControl: true,  // Enable on mobile
+      } : {
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl: false,
+        sampleRate: 44100
+      };
+      
       navigator.mediaDevices
         .getUserMedia({ 
-          audio: {
-            echoCancellation: false,
-            noiseSuppression: false,
-            autoGainControl: false,
-            sampleRate: 44100
-          }
+          audio: audioConstraints
         })
         .then(function (stream) {
           console.log("Microphone access granted");
           
-          // Create audio context with better settings
-          audioContext = new (window.AudioContext || window.webkitAudioContext)({
-            sampleRate: 44100
-          });
+          // Create or resume audio context
+          if (!audioContext || audioContext.state === 'closed') {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          
+          // Resume audio context if suspended (required on mobile)
+          if (audioContext.state === 'suspended') {
+            audioContext.resume().then(() => {
+              console.log("Audio context resumed");
+            }).catch(err => {
+              console.log("Failed to resume audio context:", err);
+            });
+          }
           
           analyser = audioContext.createAnalyser();
           analyser.fftSize = 2048; // Even higher resolution for better frequency analysis
@@ -922,6 +997,7 @@
         })
         .catch(function (err) {
           console.log("Unable to access microphone: " + err);
+          console.log("Error details:", err.name, err.message);
           // Fallback: allow manual candle blowing by clicking
           setupManualBlowing();
         });
